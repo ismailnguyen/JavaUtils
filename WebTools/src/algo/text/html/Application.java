@@ -8,7 +8,5 @@ public class Application {
 		IWebTools app = new WebTools();
 
 		System.out.println(app.htmlCount("<a href=\"mon_lien\"> &raquo; un lien </a>"));
-
 	}
-
 }
