@@ -9,11 +9,10 @@ public class Application {
 	public static void main(String[] args) {
 		IWebTools app = new WebTools();
 
-		System.out.println(app.htmlCount("<a href=\"mon_lien\"> &raquo; un lien </a>"));
-		/*
+		System.out.println(app.htmlCount("<a href=\"mon_lien\"> &raquo; &raquo; &raquo; un lien </a>"));
+		
 		LinkedStack<LinkSimple<String>> stack = new LinkedStack<LinkSimple<String>>();
 		LinkSimple<String> ls1 = new LinkSimple<String>();
-		ls1.
-		*/
+		ls1.setValue("blablabla");
 	}
 }
