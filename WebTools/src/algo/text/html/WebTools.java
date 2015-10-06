@@ -6,26 +6,7 @@ public class WebTools extends WebToolsAdapter {
 
 	@Override
 	public int htmlCount(String arg0) {
-		int count = 0;
-	
-		arg0 = arg0.replaceAll("<[^>]*>", "");
-		arg0 = arg0.replaceAll("(?<=&).*?(?=;)", "");
-
-		String[] str = arg0.split(" ");
-		
-		for(String s : str)
-			if(!s.isEmpty())
-			{
-				if(s.equals("&;"))
-					count++;
-				else
-					for(int i=0; i<s.length(); i++)
-						count++;
-
-				count++;
-			}
-		
-		return --count;
+		return arg0 == null ? null : ((arg0.replaceAll("<[^>]*>", "").replaceAll("&.*;", "a")).trim()).length();
 	}
 
 	@Override
