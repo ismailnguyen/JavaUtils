@@ -44,17 +44,6 @@ public class LinkedStack<V> implements ILifo<V> {
 			
 			return (V) next;
 		}
-		
-		@Override
-		public void remove()
-		{
-			try {
-				throw new StackEmptyException();
-			} catch (StackEmptyException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 	@Override

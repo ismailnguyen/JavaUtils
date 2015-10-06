@@ -5,47 +5,36 @@ import java.util.Iterator;
 import algo.file.exceptions.FileEmptyException;
 import algo.file.interfaces.IFifo;
 import algo.linkedlist.nodes.LinkSimple;
-import algo.linkedlist.nodes.interfaces.ILinkSimple;
 
 public class LinkedCircularFile<V> implements IFifo<V>{
 	
-	private LinkSimple<V> list = null;
+	private LinkSimple<V> list = new LinkSimple<V>();
 
 	@Override
 	public Iterator<V> iterator() {
-		return new LinkIterator();
-	}
+		Iterator<V> iterator = new Iterator<V>() {
+			LinkSimple<V> temp = (LinkSimple<V>) list.getNext();
+			@Override
+			public boolean hasNext() {
+				return (temp.getNext() == list)? false : true;
+			}
 	
-	private class LinkIterator implements Iterator<V> {
-	
-		private ILinkSimple<V> current = list;
-		
-		@Override
-		public boolean hasNext() {
-			return this.current != null;
-		}
-	
-		@Override
-		public V next() {
-			if(!hasNext())
-				try {
-					throw new FileEmptyException();
-				} catch (FileEmptyException e) {
-					e.printStackTrace();
+			@Override
+			public V next() {
+				if(hasNext()){
+					temp = (LinkSimple<V>) temp.getNext();
 				}
-			
-			ILinkSimple<V> next = (ILinkSimple<V>) current.getValue();
-			this.current = (ILinkSimple<V>) this.current.getNext();
-			
-			return (V) next;
-		}	
+				return temp.getValue();
+			}	
+		};
+		return iterator;
 	}
 
 	@Override
 	public void queue(V value) {
 		LinkSimple<V> newNode = new LinkSimple<V>();
 		newNode.setValue(value);
-		if(list == null)
+		if(list.getValue() == null)
 		{
 			newNode.setNext(newNode);
 			list = newNode;
@@ -60,9 +49,12 @@ public class LinkedCircularFile<V> implements IFifo<V>{
 
 	@Override
 	public V dequeue() throws FileEmptyException {
+		if(list.getValue() == null)
+			throw new FileEmptyException();
+		
 		V tmp = list.getNext().getValue();
 		if(list == list.getNext())
-			list = null;
+			list = new LinkSimple<V>();
 		else
 			list.setNext(list.getNext().getNext());
 		return tmp;
@@ -70,12 +62,15 @@ public class LinkedCircularFile<V> implements IFifo<V>{
 
 	@Override
 	public V peek() throws FileEmptyException {
+		if(list.getValue() == null)
+			return null;
+		
 		return list.getNext().getValue();
 	}
 
 	@Override
 	public int size() {
-		if(list == null)
+		if(list.getValue() == null)
 			return 0;
 		int size = 1;
 		LinkSimple<V> cur = new LinkSimple<V>();
@@ -90,7 +85,7 @@ public class LinkedCircularFile<V> implements IFifo<V>{
 
 	@Override
 	public boolean isEmpty() {
-		if(list == null)
+		if(list.getValue() == null)
 			return true;
 		else
 			return false;
