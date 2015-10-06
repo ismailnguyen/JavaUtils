@@ -3,11 +3,11 @@ package algo.linkedlist.nodes;
 import algo.linkedlist.nodes.interfaces.ILinkDouble;
 import algo.linkedlist.nodes.interfaces.ILinkSimple;
 
-public class LinkDouble extends LinkSimple implements ILinkDouble {
+public class LinkDouble extends LinkSimple<Object> implements ILinkDouble<Object> {
 
 	private Object data;
-	private ILinkDouble previous;
-	private ILinkDouble next;
+	private ILinkDouble<Object> previous;
+	private ILinkDouble<Object> next;
 	
 	@Override
 	public Object getValue() {
@@ -15,7 +15,7 @@ public class LinkDouble extends LinkSimple implements ILinkDouble {
 	}
 
 	@Override
-	public void setNext(ILinkSimple arg0) {
+	public void setNext(ILinkSimple<Object> arg0) {
 		this.setNext(arg0);
 	}
 
@@ -25,23 +25,23 @@ public class LinkDouble extends LinkSimple implements ILinkDouble {
 	}
 
 	@Override
-	public ILinkDouble getNext() {
+	public ILinkDouble<Object> getNext() {
 		return this.next;
 	}
 
 	@Override
-	public ILinkDouble getPrevious() {
+	public ILinkDouble<Object> getPrevious() {
 		return this.previous;
 	}
 
 	@Override
-	public void setNext(ILinkDouble arg0) {
+	public void setNext(ILinkDouble<Object> arg0) {
 		this.next = arg0;
 		
 	}
 
 	@Override
-	public void setPrevious(ILinkDouble arg0) {
+	public void setPrevious(ILinkDouble<Object> arg0) {
 		this.previous = arg0;
 	}
 
