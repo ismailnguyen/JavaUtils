@@ -2,28 +2,28 @@ package algo.linkedlist.nodes;
 
 import algo.linkedlist.nodes.interfaces.ILinkSimple;
 
-public class LinkSimple implements ILinkSimple {
+public class LinkSimple<V> implements ILinkSimple<V> {
 	
-	private Object data;
-	private ILinkSimple next;
+	private V data;
+	private ILinkSimple<V> next;
 
 	@Override
-	public ILinkSimple getNext() {
+	public ILinkSimple<V> getNext() {
 		return this.next;
 	}
 
 	@Override
-	public Object getValue() {
+	public V getValue() {
 		return this.data;
 	}
 
 	@Override
-	public void setNext(ILinkSimple arg0) {
+	public void setNext(ILinkSimple<V> arg0) {
 		this.next = arg0;
 	}
 
 	@Override
-	public void setValue(Object arg0) {
+	public void setValue(V arg0) {
 		this.data = arg0;
 	}
 
