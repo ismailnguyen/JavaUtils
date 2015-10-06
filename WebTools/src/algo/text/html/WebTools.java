@@ -14,7 +14,6 @@ public class WebTools extends WebToolsAdapter {
 		String[] str = arg0.split(" ");
 		
 		for(String s : str)
-		{
 			if(!s.isEmpty())
 			{
 				if(s.equals("&;"))
@@ -25,11 +24,8 @@ public class WebTools extends WebToolsAdapter {
 
 				count++;
 			}
-		}
 		
-		count--;
-		
-		return count;
+		return --count;
 	}
 
 	@Override
