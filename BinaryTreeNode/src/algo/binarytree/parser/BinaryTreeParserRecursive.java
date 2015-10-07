@@ -7,29 +7,27 @@ import algo.binarytree.parser.interfaces.IParseWork;
 public class BinaryTreeParserRecursive<T> implements IBinaryTreeParser<T> {
 
     @Override
-    public void parse(IBinaryTreeNode<T> iBinaryTreeNode, ParseMethod parseMethod, IParseWork<T>[] iParseWorks) {
+    public void parse(IBinaryTreeNode<T> arg0, ParseMethod arg1, IParseWork<T>[] arg2) {
 
-        if(iBinaryTreeNode == null)
+        if(arg0 == null)
             return;
 
-        if(parseMethod == ParseMethod.INFIX){
-            parse(iBinaryTreeNode.getLeftChild(), parseMethod, iParseWorks);
-            //iBinaryTreeNode.getValue();
-            iParseWorks[0].execute(iBinaryTreeNode, 0, "");
-            parse(iBinaryTreeNode.getRightChild(), parseMethod, iParseWorks);
-
-        }else if(parseMethod == ParseMethod.PREFIX){
-            parse(iBinaryTreeNode.getLeftChild(), parseMethod, iParseWorks);
-            parse(iBinaryTreeNode.getRightChild(), parseMethod, iParseWorks);
-            iParseWorks[0].execute(iBinaryTreeNode, 0, "");
-            //iBinaryTreeNode.getValue();
-
-        }else if (parseMethod == ParseMethod.SUFFIX){
-            parse(iBinaryTreeNode.getRightChild(), parseMethod, iParseWorks);
-            //iBinaryTreeNode.getValue();
-            iParseWorks[0].execute(iBinaryTreeNode, 0, "");
-            parse(iBinaryTreeNode.getLeftChild(), parseMethod, iParseWorks);
+        if(arg1 == ParseMethod.INFIX)
+        {
+            parse(arg0.getLeftChild(), arg1, arg2);
+            arg2[0].execute(arg0, 0, "");
+            parse(arg0.getRightChild(), arg1, arg2);
         }
-
+        else if(arg1 == ParseMethod.PREFIX){
+        	arg2[0].execute(arg0, 0, "");
+            parse(arg0.getLeftChild(), arg1, arg2);
+            parse(arg0.getRightChild(), arg1, arg2);
+        }
+        else if (arg1 == ParseMethod.SUFFIX)
+        {
+        	parse(arg0.getLeftChild(), arg1, arg2);
+        	parse(arg0.getRightChild(), arg1, arg2);
+            arg2[0].execute(arg0, 0, "");
+        }
     }
 }
