@@ -49,27 +49,17 @@ public class MathUtil implements IMathUtil {
 	}
 
 	@Override
-	public double pi(int arg0) {
-		double denom = 3.0;
-		double num = 1.0;
-		boolean operator = false;
-		int power = arg0;
-		
-		 for (int x = 0; x < 21; x++) {
-			 if (operator == false) {
-				 num -= (1.0/(denom*(this.pow(3, power))));
-				 operator = true;
-			 }
-			 else {
-				 num += (1.0/(denom*(this.pow(3, power))));
-				 operator = false;
-			 }
-			 denom += 2;
-			 power += 1;
-		 }
+     public double pi(int i) {
+         double result = 0;
 		 
-		 return this.sqrt(12, 1) * num;
-	}
+         if(i == 0)
+             i = 1;
+		 
+         for(int k = 0; k <= i; k++)
+            result += pow(-1, k) / ((2.0*k) +1.0);
+		 
+         return 4.0 * result;
+     }
 
 	@Override
 	public long pow(int arg0, int arg1) {
@@ -80,31 +70,22 @@ public class MathUtil implements IMathUtil {
 	}
 
 	@Override
-	public double sqrt(double arg0, int arg1) {
-		double a, b, m, x; 
-	      if(arg0==0.0) {
-	         return 0.0;
-	      }
-	      else {
-	         m=1.0; 
-	         x=arg0; 
-	         while(x>=2.0) {
-	            x=0.25*x; 
-	            m=2.0*m;
-	         }
-	         while(x<0.5) {
-	            x=4.0*x; 
-	            m=0.5*m; 
-	         }
-	         a=x; 
-	         b=1.0-x; 
-	         do { 
-	            a=a*(1.0+0.5*b); 
-	            b=0.25*(3.0+b)*b*b; 
-	         } while(b>=1.0E-15); 
-	         
-	         return a*m;
-	      }
-	}
+	 public double sqrt(double arg0, int arg1) {
+		if(arg0 < 0) return 0;
+	  
+		double num = arg0, upperbound;
+		 
+		float guess, e;
+		 guess = 1;
+		 e = 1/arg1;
+		 do 
+		 {
+			 upperbound = num / guess;
+			 guess = (float) ((upperbound + guess) / 2);
+		 } while (!(guess * guess >= num - e && 
+					guess * guess <= num + e));
+
+		 return guess;
+	 }
 
 }
