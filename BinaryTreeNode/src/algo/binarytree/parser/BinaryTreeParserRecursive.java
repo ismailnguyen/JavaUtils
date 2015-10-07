@@ -9,7 +9,7 @@ public class BinaryTreeParserRecursive<T> implements IBinaryTreeParser<T> {
     @Override
     public void parse(IBinaryTreeNode<T> arg0, ParseMethod arg1, IParseWork<T>[] arg2) {
 
-        if(arg0 == null)
+        if(arg0 == null || arg2 == null)
             return;
 
         if(arg1 == ParseMethod.INFIX)
