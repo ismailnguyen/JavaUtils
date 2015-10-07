@@ -2,7 +2,7 @@ package algo.binarytree.parser.works;
 
 import algo.binarytree.parser.works.interfaces.IPathLengthInternal;
 
-public class PathLengthInternal implements IPathLengthInternal {
+public class PathLengthInternal<T> implements IPathLengthInternal {
 
 	@Override
 	public int getInternalPathLength() {

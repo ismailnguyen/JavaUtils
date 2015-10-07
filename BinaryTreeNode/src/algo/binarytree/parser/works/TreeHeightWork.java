@@ -1,14 +1,14 @@
 package algo.binarytree.parser.works;
 
-import algo.binarytree.node.interfaces.IBinaryTreeNode;
-import algo.binarytree.parser.interfaces.IParseWork;
+import algo.binarytree.parser.works.interfaces.ITreeHeightWork;
 
-public class TreeHeightWork<T> implements IParseWork<T> {
+public class TreeHeightWork<T> implements ITreeHeightWork {
 
 	@Override
-	public void execute(IBinaryTreeNode<T> arg0, int arg1, String arg2) {
+	public int getTreeHeight() {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
+
 
 }

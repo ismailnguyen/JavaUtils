@@ -2,7 +2,7 @@ package algo.binarytree.parser.works;
 
 import algo.binarytree.parser.works.interfaces.ITreeKindWork;
 
-public class TreeKindWork implements ITreeKindWork {
+public class TreeKindWork<T> implements ITreeKindWork {
 
 	@Override
 	public TreeKind getTreeKind() {

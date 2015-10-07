@@ -18,18 +18,18 @@ public class Application {
 		parent.getLeftChild().setRightChild(new BinaryTreeNode<Integer>(4));
 		parent.getLeftChild().getLeftChild().setRightChild(new BinaryTreeNode<Integer>(7));
 		parent.getLeftChild().getLeftChild().getRightChild().setRightChild(new BinaryTreeNode<Integer>(7));
-
+		
 		TreeHeightWork<Integer> height = new TreeHeightWork<Integer>();
 		TreeKindWork<Integer> kind = new TreeKindWork<Integer>();
 		DepthAverageExtern<Integer> depth = new DepthAverageExtern<Integer>();
 		PathLengthExternal<Integer> extern = new PathLengthExternal<Integer>();
 		PathLengthInternal<Integer> intern = new PathLengthInternal<Integer>();
 		IParseWork<Integer>[] operations = new IParseWork[] {
-				height,
-				kind ,
-				depth ,
-				extern ,
-				intern
+				(IParseWork) height,
+				(IParseWork) kind ,
+				(IParseWork) depth ,
+				(IParseWork) extern ,
+				(IParseWork) intern
 		};
 		parser.parse(parent, ParseMethod.INFIX, operations);
 		
