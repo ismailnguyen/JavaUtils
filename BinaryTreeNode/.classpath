@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/BinaryTreeNode/binarytree-node-interfaces.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/BinaryTreeNode/binarytree-parser-interfaces.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/BinaryTreeNode/binarytree-parse-works-measure-interfaces.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/Stack/stack-interfaces.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/LinkedList/linkedlist-node-interfaces.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
