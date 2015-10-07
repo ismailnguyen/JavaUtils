@@ -2,186 +2,195 @@ package algo.binarytree.node;
 
 import algo.binarytree.node.interfaces.IBinaryTreeNode;
 
-public class BinaryTreeNode<V> implements IBinaryTreeNode<V> {
+public class BinaryTreeNode<V> implements IBinaryTreeNode<V>
+{
+	public BinaryTreeNode()
+	{
+		super();
+	}
+	
+	public BinaryTreeNode(V value)
+	{
+		super();
+		this.value = value;
+	}
+	
+	private V value;
+	private boolean hasValueChanged = false;
 
+	@Override
+	public void setValue(V value)
+	{
+		this.value = value;
+		hasValueChanged = true;
+	}
 
-    private V value;
-    private boolean changed;
-    private IBinaryTreeNode<V> parent;
-    private IBinaryTreeNode<V> left;
-    private IBinaryTreeNode<V> right;
+	@Override
+	public V getValue()
+	{
+		hasValueChanged = false;
+		return value;
+	}
 
-    public BinaryTreeNode(){
-        this.value = null;
-        this.changed = false;
-        this.parent = null;
-        this.left = null;
-        this.right = null;
-    }
+	@Override
+	public boolean isValueChanged()
+	{
+		return hasValueChanged;
+	}
 
-    @Override
-    public V getValue() {
-        return this.value;
-    }
+	private IBinaryTreeNode<V> parent, left, right;
 
-    @Override
-    public void setValue(V o) {
-        this.value = o;
-        this.changed = true;
-    }
+	@Override
+	public void setParent(IBinaryTreeNode<V> parent)
+	{
+		this.parent = parent;
+	}
 
-    @Override
-    public boolean isValueChanged() {
-        return this.changed;
-    }
+	@Override
+	public IBinaryTreeNode<V> getParent()
+	{
+		return parent;
+	}
 
-    @Override
-    public IBinaryTreeNode<V> getParent() {
-        return this.parent;
-    }
+	@Override
+	public IBinaryTreeNode<V> getGrandParent()
+	{
+		if (parent != null && parent.getParent() != null)
+			return parent.getParent();
+		return null;
+	}
 
-    @Override
-    public IBinaryTreeNode<V> getLeftChild() {
-        return this.left;
-    }
+	@Override
+	public void setLeftChild(IBinaryTreeNode<V> leftChild)
+	{
+		left = leftChild;
+		if (leftChild != null)
+			leftChild.setParent(this);
+	}
 
-    @Override
-    public IBinaryTreeNode<V> getRightChild() {
-        return this.right;
-    }
+	@Override
+	public void setRightChild(IBinaryTreeNode<V> rightChild)
+	{
+		right = rightChild;
+		if (rightChild != null)
+			rightChild.setParent(this);
+	}
 
-    @Override
-    public IBinaryTreeNode<V> getGrandParent() {
-        IBinaryTreeNode<V> res;
-        if(this.parent == null)
-            res = null;
-        else
-            res = this.parent.getParent();
-        return res;
-    }
+	@Override
+	public IBinaryTreeNode<V> getLeftChild()
+	{
+		return left;
+	}
 
-    @Override
-    public IBinaryTreeNode<V> getUncle() {
-        IBinaryTreeNode<V> res = null;
-        if(this.getGrandParent() != null){
-            if(this.getGrandParent().getLeftChild() == this.getParent()){
-                res = this.getGrandParent().getRightChild();
-            }else {
-                res = this.getGrandParent().getLeftChild();
-            }
-        }
-        return res;
-    }
+	@Override
+	public IBinaryTreeNode<V> getRightChild()
+	{
+		return right;
+	}
 
-    @Override
-    public void setParent(IBinaryTreeNode<V> p) {
-        this.parent = p;
-    }
+	@Override
+	public IBinaryTreeNode<V> getUncle()
+	{
+		IBinaryTreeNode<V> grandParent = getGrandParent();
+		
+		if (grandParent != null)
+		{
+			if (parent.isLeftChild())
+			{
+				return grandParent.getRightChild();
+			}
+			return grandParent.getLeftChild();
+		}
+		return null;
+	}
 
-    @Override
-    public void setRightChild(IBinaryTreeNode<V> r) {
-        this.right = r;
-         r.setParent(this);
-    }
+	@Override
+	public int getLevel()
+	{
+		if (parent == null)
+			return 0;
+		return (parent.getLevel() + 1);
+	}
 
-    @Override
-    public void setLeftChild(IBinaryTreeNode<V> l) {
-        this.left = l;
-        l.setParent(this);
-    }
+	@Override
+	public boolean isSimplePoint()
+	{
+		return ((left == null) ^ (right == null));
+	}
 
-    @Override
-    public boolean isSimplePoint() {
-        boolean res = false;
-        if(this.isDoublePoint() == false || this.isLeaf() == false)
-            res = true;
-        return res;
-    }
+	@Override
+	public boolean isDoublePoint()
+	{
+		return ((left != null) && (right != null));
+	}
 
-    @Override
-    public boolean isDoublePoint() {
-        boolean res = false;
-        if(this.left != null && this.right != null)
-            res = true;
-        return res;
-    }
+	@Override
+	public boolean isLeaf()
+	{
+		return ((left == null) && (right == null));
+	}
 
-    @Override
-    public boolean isLeaf() {
-        boolean res = false;
-        if(this.left == null && this.right == null)
-            res = true;
-        return res;
-    }
+	@Override
+	public boolean isLeftChild()
+	{
+		if (parent != null)
+			return (this == parent.getLeftChild());
+		return false;
+	}
 
-    @Override
-    public boolean isLeftChild() {
-        boolean res = false;
-        if(this.getParent() != null){
-            if(this.getParent().getLeftChild() == this){
-                res = true;
-            }
-        }
-        return res;
-    }
+	@Override
+	public boolean isRightChild()
+	{
+		if (parent != null)
+			return (this == parent.getRightChild());
+		return false;
+	}
 
-    @Override
-    public boolean isRightChild() {
-        boolean res = false;
-        if(this.getParent() != null){
-            if(this.getParent().getRightChild() == this){
-                res = true;
-            }
-        }
-        return res;
-    }
+	@Override
+	public void rotateLeft()
+	{
+		if (right != null)
+		{
+			if (parent != null)
+			{
+				if (this.isRightChild())
+					parent.setRightChild(right);
+				else
+					parent.setLeftChild(right);
+			}
+			
+			IBinaryTreeNode<V> buffer = right.getLeftChild();
+			right.setLeftChild(this);
+			setRightChild(buffer);
+		}
+	}
 
-    @Override
-    public void rotateLeft() {
-        IBinaryTreeNode<V> save = this.getRightChild();
-        this.right.setParent(this.getParent());
-        this.setRightChild(this.getLeftChild());
-        save.setLeftChild(this);
-    }
+	@Override
+	public void rotateRight()
+	{
+		if (left != null)
+		{
+			if (parent != null)
+			{
+				if (this.isRightChild())
+					parent.setRightChild(left);
+				else
+					parent.setLeftChild(left);
+			}
+			
+			IBinaryTreeNode<V> buffer = left.getRightChild();
+			left.setRightChild(this);
+			setLeftChild(buffer);
+		}
+	}
 
-    @Override
-    public void rotateRight() {
-        IBinaryTreeNode<V> save = this.getLeftChild();
-        this.left.setParent(this.getParent());
-        this.setLeftChild(this.getRightChild());
-        save.setRightChild(this);
-    }
-
-    @Override
-    public String getPath() {
-        String res = new String();
-        IBinaryTreeNode<V> current = this;
-        IBinaryTreeNode<V> child;
-
-        while (current.getParent() != null){
-            child = current;
-            current = current.getParent();
-
-            if(current.getLeftChild() == child){
-                res += '0';
-            }else {
-                res += '1';
-            }
-        }
-
-        res = new StringBuilder(res).reverse().toString();
-
-        return res;
-    }
-
-    @Override
-    public int getLevel() {
-        IBinaryTreeNode<V> current = this;
-        int res = 0;
-        while (current.getParent() != null){
-            current = current.getParent();
-            res++;
-        }
-        return res;
-    }
+	@Override
+	public String getPath()
+	{
+		if (parent != null)
+		{
+			return (parent.getPath() + ((isLeftChild()) ? "0" : "1"));
+		}
+		return "";
+	}
 }
