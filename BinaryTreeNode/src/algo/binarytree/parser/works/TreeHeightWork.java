@@ -5,17 +5,17 @@ import algo.binarytree.parser.interfaces.IParseWork;
 import algo.binarytree.parser.works.interfaces.ITreeHeightWork;
 
 public class TreeHeightWork<S> implements ITreeHeightWork, IParseWork<S>{
-	int _height = 0;
+	int height = 0;
 
 	@Override
 	public int getTreeHeight() {
-		return _height;
+		return height;
 	}
 
 	@Override
 	public void execute(IBinaryTreeNode<S> node, int level, String path) {
-		if (level > _height) {
-			_height = level;
+		if (level > height) {
+			height = level;
 		}
 	}
 

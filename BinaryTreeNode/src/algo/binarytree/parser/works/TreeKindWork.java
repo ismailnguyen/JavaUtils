@@ -6,39 +6,39 @@ import algo.binarytree.parser.works.interfaces.ITreeKindWork;
 
 public class TreeKindWork<T> implements IParseWork<T>, ITreeKindWork {
 	
-	boolean _degenere = true;
-	boolean _complet = true;
-	boolean _local_complet = true;
-	boolean _parfait = true;
-	int _level = 0;
+	boolean degenere = true;
+	boolean complet = true;
+	boolean local_complet = true;
+	boolean parfait = true;
+	int level = 0;
 
 	@Override
-	public void execute(IBinaryTreeNode<T> node, int level, String path) {
-		if (level > _level) {
-			_level = level;
+	public void execute(IBinaryTreeNode<T> node, int l, String path) {
+		if (l > level) {
+			level = l;
 		}
 		
 		if (!node.isLeaf() && node.isDoublePoint()) {
-			_degenere = false;
+			degenere = false;
 		}
-		if (node.isLeaf() && level != _level) {
-			_complet = false;
+		if (node.isLeaf() && l != level) {
+			complet = false;
 		}
 		if (!node.isLeaf() && !node.isDoublePoint()) {
-			_local_complet = false;
-			_complet = false;
+			local_complet = false;
+			complet = false;
 		}
 	}
 
 	@Override
 	public TreeKind getTreeKind() {
-		if (_degenere)
+		if (degenere)
 			return TreeKind.DEGENERATED;
-		if (_complet)
+		if (complet)
 			return TreeKind.COMPLETE;
-		if (_local_complet)
+		if (local_complet)
 			return TreeKind.LOCALLY_COMPLETE;
-		if (_parfait)
+		if (parfait)
 			return TreeKind.PERFECT;
 		
 		return TreeKind.OTHER;
