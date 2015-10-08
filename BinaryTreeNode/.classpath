@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/LinkedList/linkedlist-node-interfaces.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/BinaryTreeNode/binarytree-util-printer-interfaces.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/BinaryTreeNode/binarytree-searcher-interfaces.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ismail/Documents/GitHub/JavaUtils/BinaryTreeNode/priority-queue-interfaces.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
