@@ -6,26 +6,22 @@ import algo.binarytree.node.interfaces.IBinaryTreeNode;
 import algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchListener;
 import algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchMethod;
 
-public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V>{
-	
-	Comparator<V> comparator;
+public class IterativeSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 
+	Comparator<V> comparator;
+	
 	@Override
 	public Comparator<V> getComparator() {
-		return comparator;
+		return this.comparator;
 	}
 
 	@Override
-	public SearchResult<V> search(
-			OccurrenceStrategy strategy,
-			IBinaryTreeNode<V> tree, V tosearch,
-			IBinarySearchTreeSearchListener<V>[] listener) {
+	public algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchMethod.SearchResult<V> search(
+			algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchMethod.OccurrenceStrategy arg0,
+			IBinaryTreeNode<V> arg1, V arg2,
+			IBinarySearchTreeSearchListener<V>[] arg3) {
 		// TODO Auto-generated method stub
-		SearchResult res = new SearchResult();
-		if (strategy == OccurrenceStrategy.LAST) {
-			
-		}
-		return res;
+		return null;
 	}
 
 	@Override
