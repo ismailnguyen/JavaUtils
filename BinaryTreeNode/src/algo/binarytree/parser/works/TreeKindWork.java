@@ -18,7 +18,6 @@ public class TreeKindWork<T> implements IParseWork<T>, ITreeKindWork {
 			_level = level;
 		}
 		
-		
 		if (!node.isLeaf() && node.isDoublePoint()) {
 			_degenere = false;
 		}

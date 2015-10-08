@@ -25,17 +25,12 @@ public class Application {
 //				new BinaryTreeNode<Integer>(1), new BinaryTreeNode<Integer>(2));
 
 		TreeHeightWork<Integer> height = new TreeHeightWork<Integer>();
+		height.execute(parent, 4, "");
 		TreeKindWork<Integer> kind = new TreeKindWork<Integer>();
 		DepthAverageExtern<Integer> depth = new DepthAverageExtern<Integer>();
 		PathLengthExternal<Integer> extern = new PathLengthExternal<Integer>();
 		PathLengthInternal<Integer> intern = new PathLengthInternal<Integer>();
-		IParseWork<Integer>[] operations = new IParseWork[] {
-				height,
-				kind ,
-				depth ,
-				extern ,
-				intern
-		};
+		IParseWork<Integer>[] operations = new IParseWork[] { height, kind, depth, extern, intern };
 		parser.parse(parent, ParseMethod.INFIX, operations);
 		
 		System.out.println(height.getTreeHeight());
