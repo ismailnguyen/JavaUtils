@@ -7,7 +7,7 @@ import algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchListener;
 import algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchMethod;
 
 public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
-	private Comparator<V> comparator = new Comparator<V>() {
+	private Comparator<V> arg0= new Comparator<V>() {
 
 		@Override
 		public int compare(V o1, V o2) {
@@ -17,19 +17,22 @@ public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 				return -1;
 			return 0;
 		}
+		
 	};
-	
+	private SearchResult<V> sr;
 	@Override
 	public Comparator<V> getComparator() {
-		return comparator;
+		// TODO Auto-generated method stub
+		return arg0;
 	}
 
 	@Override
 	public algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchMethod.SearchResult<V> search(
 			algo.binarytree.searcher.interfaces.IBinarySearchTreeSearchMethod.OccurrenceStrategy arg0,
 			IBinaryTreeNode<V> arg1, V arg2, IBinarySearchTreeSearchListener<V>[] arg3) {
-		SearchResult<V> sr = null;
+		sr = null;
 		if(arg0==OccurrenceStrategy.FIRST){
+			
 			if(arg1==null)
 				return null;
 			if(this.getComparator().compare(arg1.getValue(), arg2)==0){
@@ -37,9 +40,9 @@ public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 				 return sr;
 			}
 			else if(this.getComparator().compare(arg1.getValue(), arg2)>0)
-				return search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3); 
+				return search(OccurrenceStrategy.FIRST, arg1.getLeftChild(), arg2, arg3); 
 			else
-				return search(OccurrenceStrategy.ALL, arg1.getLeftChild(), arg2, arg3); 
+				return search(OccurrenceStrategy.FIRST, arg1.getRightChild(), arg2, arg3); 
 		}
 		
 		if(arg0==OccurrenceStrategy.ALL){
@@ -47,14 +50,14 @@ public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 				return null;
 			if(this.getComparator().compare(arg1.getValue(), arg2)==0){
 				 sr.getValues().add(arg1.getValue());
-				 search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3);
 				 search(OccurrenceStrategy.ALL, arg1.getLeftChild(), arg2, arg3);
+				 search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3);
 				 return sr;
 			}
 			else if(this.getComparator().compare(arg1.getValue(), arg2)>0)
-				return search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3); 
+				return search(OccurrenceStrategy.ALL, arg1.getLeftChild(), arg2, arg3); 
 			else
-				return search(OccurrenceStrategy.ALL, arg1.getLeftChild(), arg2, arg3);
+				return search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3);
 		}
 		
 		if(arg0==OccurrenceStrategy.LAST){
@@ -62,25 +65,16 @@ public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 				return null;
 			if(this.getComparator().compare(arg1.getValue(), arg2)==0){
 				sr.setLastOccurrence(arg1);
-				return search(OccurrenceStrategy.ALL, arg1.getLeftChild(), arg2, arg3); 
+				search(OccurrenceStrategy.LAST, arg1.getLeftChild(), arg2, arg3); 
+				search(OccurrenceStrategy.LAST, arg1.getRightChild(), arg2, arg3); 
 			}
+			else if(this.getComparator().compare(arg1.getValue(), arg2)>0){
+				search(OccurrenceStrategy.ALL, arg1.getLeftChild(), arg2, arg3); 
+			}
+			else
+				 search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3);
 		}
 		return null;
-		/*if(arg0==OccurrenceStrategy.FIRST){
-			
-			if(arg1.getValue()==arg2)
-				return sr;
-			for(int i=0; i<arg3.length; i++)
-				arg3[i].onFound(arg1, OccurrenceStrategy.FIRST, this);
-			return search(OccurrenceStrategy.FIRST, arg1.getLeftChild(), arg2, arg3);
-		}
-		if(arg0==OccurrenceStrategy.LAST){
-			for(int i=0; i<arg3.length; i++)
-				arg3[i].onFound(arg1, OccurrenceStrategy.FIRST, this);
-			return search(OccurrenceStrategy.LAST, arg1.getRightChild(), arg2, arg3);
-		}
-		return search(OccurrenceStrategy.ALL, arg1.getRightChild(), arg2, arg3);
-		*/
 	}
 
 	@Override
@@ -103,7 +97,7 @@ public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 
 	@Override
 	public void setComparator(Comparator<V> arg0) {
-		this.comparator = arg0;
+		this.arg0=arg0;
 		
 	}
 	

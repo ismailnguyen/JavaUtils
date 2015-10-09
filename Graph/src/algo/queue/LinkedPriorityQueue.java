@@ -6,20 +6,20 @@ import algo.linkedlist.nodes.LinkSimple;
 import algo.linkedlist.nodes.interfaces.ILinkSimple;
 import algo.queue.interfaces.IPriorityQueue;
 
-public class LinkedPriorityQueue<T> implements IPriorityQueue<T> {
+public class LinkedPriorityQueue<V> implements IPriorityQueue<V> {
 
-	private ILinkSimple<T> head;
-	private ILinkSimple<T> current;
-	private Comparator<T> comparator;
+	private ILinkSimple<V> head;
+	private ILinkSimple<V> current;
+	private Comparator<V> comparator;
 	
-	public LinkedPriorityQueue(Comparator<T> c)
+	public LinkedPriorityQueue(Comparator<V> c)
 	{
 		this.comparator = c;
 	}
 	
 	@Override
-	public void add(T arg0) {
-		ILinkSimple<T> tmp = new LinkSimple<T>();
+	public void add(V arg0) {
+		ILinkSimple<V> tmp = new LinkSimple<V>();
 		tmp.setValue(arg0);
 		
 		if(this.head == null)	
@@ -29,8 +29,8 @@ public class LinkedPriorityQueue<T> implements IPriorityQueue<T> {
 		}
 		else
 		{
-			ILinkSimple<T> old = this.head;
-			ILinkSimple<T> n = new LinkSimple<T>();
+			ILinkSimple<V> old = this.head;
+			ILinkSimple<V> n = new LinkSimple<V>();
 			
 			while(n != null && this.comparator.compare(arg0, n.getValue()) < 0)
 			{
@@ -60,7 +60,7 @@ public class LinkedPriorityQueue<T> implements IPriorityQueue<T> {
 	}
 
 	@Override
-	public T peek() {
+	public V peek() {
 		if(this.current == null)
 			return null;
 		
@@ -68,13 +68,13 @@ public class LinkedPriorityQueue<T> implements IPriorityQueue<T> {
 	}
 
 	@Override
-	public T remove() {
+	public V remove() {
 		if(this.current == null)
 			return null;
 		
-		T tmp = this.peek();
+		V tmp = this.peek();
 		
-		ILinkSimple<T> next = this.current.getNext();
+		ILinkSimple<V> next = this.current.getNext();
 		this.current = next;
 		
 		return tmp;

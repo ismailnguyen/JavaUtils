@@ -1,6 +1,7 @@
 package algo.queue;
 
 import algo.queue.interfaces.IPriorityQueue;
+import java.util.Comparator;
 
 public class Application {
 
