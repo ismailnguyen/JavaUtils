@@ -16,7 +16,7 @@ public class RecursiveSearcher<V> implements IBinarySearchTreeSearchMethod<V> {
 			if((int)o1<(int)o2)
 				return -1;
 			return 0;
-		}	
+		}
 	};
 	
 	@Override

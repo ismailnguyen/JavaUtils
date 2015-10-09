@@ -16,7 +16,7 @@ public class Application {
 		parent.getLeftChild().setRightChild(new BinaryTreeNode<Integer>(4));
 		parent.setRightChild(new BinaryTreeNode<Integer>(6));
 
-		IBinarySearchTreeSearcher<Integer> searcher = new RecursiveSearcher<Integer>(new IntegerComparator());
+		//IBinarySearchTreeSearcher<Integer> searcher = new RecursiveSearcher<Integer>(new IntegerComparator());
 
 		/*.... Suppresion de TOUTES les noeuds ayant pour valeur 2 .... */
 		
@@ -28,7 +28,7 @@ public class Application {
 		
 		IParseWork<Integer> operations[] = new IParseWork[] {work};
 	
-		parser.parse(parent, ParseMethod.INFIX, operations);
+		//parser.parse(parent, ParseMethod.INFIX, operations);
 
 	}
 
