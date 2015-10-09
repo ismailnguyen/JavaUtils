@@ -1,6 +1,5 @@
 package algo.queue;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import algo.linkedlist.nodes.LinkSimple;
@@ -23,8 +22,11 @@ public class LinkedPriorityQueue<T> implements IPriorityQueue<T> {
 		ILinkSimple<T> tmp = new LinkSimple<T>();
 		tmp.setValue(arg0);
 		
-		if(this.head == null)
+		if(this.head == null)	
+		{
 			this.head = tmp;
+			this.current = tmp;
+		}
 		else
 		{
 			ILinkSimple<T> old = this.head;
@@ -36,60 +38,45 @@ public class LinkedPriorityQueue<T> implements IPriorityQueue<T> {
 				n = n.getNext();
 			}
 			
-			if(n == null)
+			if(old == null)
 			{
-				
+				this.current.setNext(tmp);
+				this.current = tmp;
 			}
-		}
-		
-		node = (ILinkSimple<T>) arg0;
-		node.setNext((ILinkSimple<T>) old);
-	}
-	{
-		LinkSimple<T> nouveau = new LinkSimple<T>();
-		nouveau.setValue(valeur);
-				
-		if (_head == null) {
-			_head = nouveau;
-			_tail = nouveau;
-		} else {
-			ILinkSimple<T> n = _head;
-			ILinkSimple<T> p = new LinkSimple<T>();
-			
-			
-			if (n == null ) {
-				_tail.setNext(nouveau);
-				_tail = nouveau;
-			} else{
-				if (p.getValue() != null) {
-					p.setNext(nouveau);
-				} else {
-					this._head = nouveau;
+			else
+			{
+				if(n.getValue() != null)
+				{
+					n.setNext(tmp);
 				}
-				nouveau.setNext(n);
-			}	
+				else
+				{
+					this.head = tmp;
+				}
+				
+				tmp.setNext(old);
+			}
 		}
 	}
 
 	@Override
 	public T peek() {
-		if(node == null)
+		if(this.current == null)
 			return null;
 		
-		return (T) node.getValue();
+		return this.current.getValue();
 	}
 
 	@Override
 	public T remove() {
-		if(node == null)
+		if(this.current == null)
 			return null;
 		
 		T tmp = this.peek();
 		
-		ILinkSimple<T> next = (ILinkSimple<T>) node.getNext();
-		this.node = (ILinkSimple<T>) next;
+		ILinkSimple<T> next = this.current.getNext();
+		this.current = next;
 		
 		return tmp;
 	}
-
 }
