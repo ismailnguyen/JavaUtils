@@ -9,7 +9,7 @@ public class Application {
 		IPriorityQueue<Integer> s = new LinkedPriorityQueue<Integer>(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
-				return o1.compareTo(o2);
+				return o2 != null ? o1.compareTo(o2) : o1.compareTo(0);
 			}
 		});
 		

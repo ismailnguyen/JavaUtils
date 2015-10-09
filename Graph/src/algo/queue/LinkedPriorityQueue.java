@@ -32,7 +32,7 @@ public class LinkedPriorityQueue<V> implements IPriorityQueue<V> {
 			ILinkSimple<V> old = this.head;
 			ILinkSimple<V> n = new LinkSimple<V>();
 			
-			while(n != null && this.comparator.compare(arg0, n.getValue()) < 0)
+			while(n != null && this.comparator.compare(arg0, head.getValue()) < 0)
 			{
 				old = n;
 				n = n.getNext();
@@ -61,21 +61,21 @@ public class LinkedPriorityQueue<V> implements IPriorityQueue<V> {
 
 	@Override
 	public V peek() {
-		if(this.current == null)
+		if(this.head == null)
 			return null;
 		
-		return this.current.getValue();
+		return this.head.getValue();
 	}
 
 	@Override
 	public V remove() {
-		if(this.current == null)
+		if(this.head == null)
 			return null;
 		
 		V tmp = this.peek();
 		
-		ILinkSimple<V> next = this.current.getNext();
-		this.current = next;
+		ILinkSimple<V> next = this.head.getNext();
+		this.head = next;
 		
 		return tmp;
 	}
