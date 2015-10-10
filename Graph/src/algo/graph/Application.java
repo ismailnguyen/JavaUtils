@@ -1,5 +1,10 @@
 package algo.graph;
 
+import java.util.List;
+
+import algo.graph.interfaces.IEdge;
+import algo.graph.interfaces.INode;
+
 public class Application {
 
 	public static void main(String[] args) {
